@@ -1,6 +1,6 @@
 
   <div th:replace="~{fragments/menu :: menuPrincipal}"></div>
- 
+  <link rel="stylesheet" th:href="@{/css/menu.css}">
  <ul th:each="message : ${messages}">
  	<li> <span th:text="${message.contenu}"/> <span th:text="${message.reponse}"/>
  </ul>

@@ -1,5 +1,5 @@
 <div th:replace="~{fragments/menu :: menuPrincipal}"></div>
-
+ <link rel="stylesheet" th:href="@{/css/menu.css}">
 <h1>Page Utilisateur</h1>
 
 <h2 th:text="${userToDisplay.pseudo}"></h2>
@@ -56,8 +56,8 @@
 <form th:action="@{/me/user/saveutilisateur}" method="POST"
 	 th:object="${userToDisplay}">
 	<input type="hidden" name="id" th:field="*{id}"> 
-	<input type="text" name="lastname" th:field="*{nom}"> <br>
-	<input type="text" name="fistname" th:field="*{prenom}"> <br>
+	<input type="text" name="nom" th:field="*{nom}"> <br>
+	<input type="text" name="prenom" th:field="*{prenom}"> <br>
 	<input type="text" name="email" th:field="*{email}"> <br>
 	<input type="submit" value="Modifier"> <br>
 </form>

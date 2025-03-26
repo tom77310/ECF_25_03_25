@@ -25,7 +25,7 @@ public class UtilisateurController {
 	public String getCurrentUser(Model model) {
 		Utilisateur utilisateur = utilisateurService.getCurrentUser();
 		model.addAttribute("userToDisplay", utilisateur);
-		return "affichageUser";
+		return "profil";
 	}
 	
 	@PostMapping("/saveutilisateur")
@@ -37,7 +37,7 @@ public class UtilisateurController {
 		
 		Utilisateur utilisateur = utilisateurService.getCurrentUser();
 		model.addAttribute("userToDisplay", utilisateur);
-		return "AffichageUser";
+		return "profil";
 	}
 	
 	@PostMapping("/suspendrecompte")

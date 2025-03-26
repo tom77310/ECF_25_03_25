@@ -12,40 +12,45 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-	@Autowired
-	private CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		return http.csrf(csrf -> csrf
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.csrf(csrf -> csrf
                 .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
             )
             .headers(headers -> headers
                 .frameOptions(frameOptions -> frameOptions.sameOrigin())
-            ).authorizeHttpRequests(auth -> {
-			auth.requestMatchers("/admin/**").hasRole("ADMIN");
-			auth.requestMatchers("/contact/**", "/message/**", "/transaction/**", "/transfert/**", "/utilisateur/**", "/me/user/**").hasAnyRole("USER");
-			auth.requestMatchers("/inscription", "/", "/login").permitAll();
-			auth.anyRequest().authenticated();
-		}).formLogin(Customizer.withDefaults()).build();
-	}
-	
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+            )
+            .authorizeHttpRequests(auth -> {
+                auth.requestMatchers("/admin/**").hasRole("ADMIN");
+                auth.requestMatchers("/contact/**", "/message/**", "/transaction/**", "/transfert/**", "/utilisateur/**", "/profil/**").hasAnyRole("USER");
+                auth.requestMatchers("/inscription", "/", "/login", "/css/**").permitAll();
+                auth.anyRequest().authenticated();
+            })
+            .formLogin(Customizer.withDefaults()) //page  Login par défaut
+            .logout(logout -> logout
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // URL de déconnexion
+                .logoutSuccessUrl("/") // Redirection après déconnexion
+                .permitAll()
+            )
+            .build();
+    }
 
-	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
-		AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-		authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
-		return authenticationManagerBuilder.build();
-	}
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
+        return authenticationManagerBuilder.build();
+    }
 }

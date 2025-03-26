@@ -9,6 +9,7 @@ import com.example.TP_PayYouPayMe_17_03_25.model.Utilisateur;
 import com.example.TP_PayYouPayMe_17_03_25.repository.UtilisateurRepository;
 
 
+
 @Service
 public class UtilisateurService {
 
@@ -34,6 +35,7 @@ public class UtilisateurService {
 	public List<Utilisateur> getAllUtilisateurs() {
 		return this.utilisateurRepository.findAll();
 	}
+
 
 	public void createUser(Utilisateur utilisateurToSave) {
 		utilisateurRepository.save(utilisateurToSave);

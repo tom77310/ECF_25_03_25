@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
 <link rel="stylesheet" th:href="@{/css/inscription.css}">
-    <title>Inscription</title>
-</head>
-<body>
-<div th:replace="~{fragments/menu :: menuPrincipal}"></div>
+ <div th:replace="~{fragments/menu :: menuPrincipal}"></div>
+ <link rel="stylesheet" th:href="@{/css/menu.css}">
    <h1>Inscription</h1>
      <form th:action="@{/inscription}" th:object="${user}" method="post">
         <label>Nom :</label>
@@ -34,6 +29,4 @@
         <br/>
         <button type="submit">Incription</button>
     </form>
-    <a href="/connexion">Vous avez déja un compte ? Connexion</a> 
-</body>
-</html>
+    <a href="/login">Vous avez déja un compte ? Connexion</a> 

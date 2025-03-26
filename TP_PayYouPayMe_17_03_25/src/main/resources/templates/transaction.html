@@ -1,5 +1,5 @@
 <div th:replace="~{fragments/menu :: menuPrincipal}"></div>
- 
+  <link rel="stylesheet" th:href="@{/css/menu.css}">
 <div th:text="'balance : ' + ${utilisateur.sommeCompteDepart}"></div>
  
 <form th:action="@{/transaction/createtransaction}" method="POST">

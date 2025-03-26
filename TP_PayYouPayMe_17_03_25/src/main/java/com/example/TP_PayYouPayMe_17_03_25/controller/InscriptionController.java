@@ -43,6 +43,6 @@ public class InscriptionController {
 		utilisateurToSave.setRole("USER");
 		utilisateurToSave.setConfirmer(false);
 		utilisateurService.createUser(utilisateurToSave);		
-		return "redirect:/";
+		return "redirect:/login";
 	}
 }

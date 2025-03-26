@@ -1,15 +1,14 @@
 <div th:replace="~{fragments/menu :: menuPrincipal}"></div>
+ <link rel="stylesheet" th:href="@{/css/menu.css}">
+<h1>Données Administrateur</h1>
 
-<h1>ALL DATAS</h1>
-
-
-<h2>MESSAGES</h2>
+<h2>Messages Utilisateur</h2>
 <table>
 	<tr>
 		<th>Id</th>
 		<th>Content</th>
 		<th>Date</th>
-		<th>Utilisateur name</th>
+		<th>Pseudo</th>
 		<th>Reponse</th>
 	</tr>
 	<tr th:each="message : ${messages}">
@@ -28,37 +27,27 @@
 	</tr>
 </table>
 
-
-<h2>TRANSACTIONS</h2>
+<h2>Liste des Transactions Utilisateurs</h2>
 <table>
 	<tr>
 		<th>Id</th>
-		<th>MessageContent</th>
+		<th>Contenu du message</th>
 		<th>Date</th>
-		<th>Amount</th>
-		<th>actif</th>
-
 	</tr>
 	<tr th:each="transaction : ${transactions}">
 		<td th:text="${transaction.id}" />
 		<td th:text="${transaction.contenuMessage}" />
 		<td th:text="${transaction.date}" />
-		<td th:text="${transaction.envoyeurTransaction}" />
-		<td th:text="${transaction.receveurTransaction}" />
 
 	</tr>
 </table>
 
-
-
-
-
-<h2>Utilisateur</h2>
+<h2>Liste des Utilisateurs</h2>
 <table>
 	<tr>
 		<th>Id</th>
-		<th>Username</th>
-		<th>balance</th>
+		<th>Pseudo</th>
+		<th>Somme de départ</th>
 		<th>actif</th>
 		<th>desactiver</th>
 
