@@ -1,0 +1,67 @@
+<div th:replace="~{fragments/menu :: menuPrincipal}"></div>
+
+<h1>Page Utilisateur</h1>
+
+<h2 th:text="${userToDisplay.pseudo}"></h2>
+<br>
+
+<ul th:each="message : ${userToDisplay.messageEnvoyer}">
+	<li><span th:text="${message.contenu} + ', ' + ${message.date}"></span></li>
+</ul>
+<br>
+
+<h3>Liste Contact</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Nom</th>
+		<th>Prenom</th>
+		<th>Email</th>
+	</tr>
+	<tr th:each="utilisateur : ${userToDisplay.contact}">
+		<td th:text="${utilisateur.id}"></td>
+		<td th:text="${utilisateur.nom}"></td>
+		<td th:text="${utilisateur.prenom}"></td>
+		<td th:text="${utilisateur.email}"></td>
+	</tr>
+	
+	
+	
+</table>
+
+<h2>Liste tansactions envoyées</h2>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>amount</th>
+		<th>message</th>
+		<th>date</th>
+		<th>Receveur Transaction</th>
+	</tr>
+	
+	<tr th:each="transaction : ${userToDisplay.transactionEnvoyer}">
+		<td th:text="${transaction.id}"></td>
+		<td th:text="${transaction.sommeTransaction}"></td>
+		<td th:text="${transaction.contenuMessage}"></td>
+		<td th:text="${transaction.date}"></td>
+		<td th:text="${transaction.receveurTransaction.pseudo}"></td>
+
+	</tr>
+</table>
+
+<br>
+
+<h2>Modification User</h2>
+
+<form th:action="@{/me/user/saveutilisateur}" method="POST"
+	 th:object="${userToDisplay}">
+	<input type="hidden" name="id" th:field="*{id}"> 
+	<input type="text" name="lastname" th:field="*{nom}"> <br>
+	<input type="text" name="fistname" th:field="*{prenom}"> <br>
+	<input type="text" name="email" th:field="*{email}"> <br>
+	<input type="submit" value="Modifier"> <br>
+</form>
+
+<form th:action="@{/me/user/suspendrecompte}" method="POST">
+	<input type="submit" value="Suspendre compte?">
+</form>

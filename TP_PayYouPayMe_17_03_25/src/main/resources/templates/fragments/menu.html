@@ -1,0 +1,33 @@
+<nav th:fragment="menuPrincipal">
+    <ul>
+        <li><a href="/">Accueil</a></li>
+
+        <!-- Si l'utilisateur a le rôle ADMIN -->
+        <th:block sec:authorize="hasRole('ADMIN')">
+            <li><a href="/admin">Admin</a></li>
+        </th:block>
+
+        <!-- Si l'utilisateur a le rôle USER -->
+        <th:block sec:authorize="hasRole('USER')">
+            <li><a href="/profil/">Profil</a></li>
+            <li><a href="/transaction/">Transaction</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/message/">Message</a></li>
+            <li><a href="/transfert/">Transfert</a></li>
+        </th:block>
+
+        <!-- Si l'utilisateur n'est pas connecté -->
+        <th:block sec:authorize="!isAuthenticated()">
+            <li><a href="/inscription">Inscription</a></li>
+          <!--   <li><a href="/connexion">Connexion</a></li> -->
+        </th:block>
+
+        <!-- Si l'utilisateur est connecté, afficher "Déconnexion" -->
+        <th:block sec:authorize="isAuthenticated()">
+            <li><a href="/logout">Déconnexion</a></li>
+        </th:block>
+    </ul>
+</nav>
+
+
+

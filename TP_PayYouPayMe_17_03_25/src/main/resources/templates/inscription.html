@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/css/inscription.css}">
+    <title>Inscription</title>
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menuPrincipal}"></div>
+   <h1>Inscription</h1>
+     <form th:action="@{/inscription}" th:object="${user}" method="post">
+        <label>Nom :</label>
+        <input type="text" th:field="*{nom}" required/>
+        <br/>
+        <label>Prenom :</label>
+        <input type="text" th:field="*{prenom}" required/>
+        <br/>  
+        <label>Email</label>
+        <input type="text" th:field="*{email}" required/>
+        <br/>   
+        <label>Somme de départ :</label>
+        <input type="number" th:field="*{sommeCompteDepart}" required/>
+        <br/>   
+        <label>Iban </label>
+        <input type="text" th:field="*{iban}" required/>
+        <br/>   
+        <label>login</label>
+        <input type="text" th:field="*{login}" required/>
+        <br/>            
+        <label>Pseudo :</label>
+        <input type="text" th:field="*{pseudo}" required/>
+        <br/>
+        <label>Mot de passe :</label>
+        <input type="password" th:field="*{motDePasse}" required/>
+        <br/>
+        <button type="submit">Incription</button>
+    </form>
+    <a href="/connexion">Vous avez déja un compte ? Connexion</a> 
+</body>
+</html>
